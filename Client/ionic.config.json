@@ -1,0 +1,7 @@
+{
+  "name": "riegoApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button (click)="detalleBack()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>Dispositivo -</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>riego</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content> 
+    <h1>Electrovalvula <small>{{this.idDispositivo}}</small></h1>
+    <ul *ngFor="let r of riegos">
+      <li>
+        ESTADO:   {{r.apertura}} fecha={{r.fecha}}
+      </li>
+    </ul>
+</ion-content>

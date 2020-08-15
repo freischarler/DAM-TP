@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button (click)="detalleBack()">
+              <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      <ion-title>Dispositivo -</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- 
+        this.medicion.dispositivoId
+        this.medicion.fecha
+        this.medicion.medicionId
+        this.medicion.valor
+-->
+
+
+<ion-content> 
+  <h1>SENSOR <small>{{this.idDispositivo}}</small></h1>
+  <ul *ngFor="let m of mediciones">
+    <li>
+      n{{m.medicionId}} valor={{m.valor}} fecha={{m.fecha}}
+    </li>
+  </ul>
+
+ 
+
+</ion-content>
