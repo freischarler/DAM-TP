@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Medicion } from '../model/Medicion'
 import { Observable } from 'rxjs';
 import { async } from '@angular/core/testing';
@@ -39,7 +39,21 @@ export class MedicionService {
     return this.asyncMediciones;
   }
 
-  agregarMedicion(medicion:Medicion){
-    return this._http.post(API_URL+"/api/medicion/agregar",{fecha:medicion.fecha,valor:medicion.valor,dispositivoId:medicion.dispositivoId});  
+  agregarMedicion(dispositivoId:number,valor,fecha): Observable<any> {
+    
+    const headers = new HttpHeaders ({'Content-Type': 'application/json'});
+    
+    const paquete = {
+      fecha,
+      valor,
+      dispositivoId
+    };
+
+    const body=JSON.stringify(paquete);
+
+    console.log(body);
+    return this._http.post(API_URL + '/api/medicion/agregar', body,{'headers':headers});
+
+    //return await this._http.post(API_URL+"/api/medicion/agregar",{body}).toPromise;  
   }
 }

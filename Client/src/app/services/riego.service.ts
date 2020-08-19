@@ -20,9 +20,16 @@ export class RiegoService {
 
   constructor( private _http: HttpClient ) { }
 
-  addEstado(riego:Riego): Observable<any> {
+  addEstado(apertura:number, electrovalvulaId,fecha:string): Observable<any> {
     const headers = new HttpHeaders ({'Content-Type': 'application/json'});
-    const body=JSON.stringify(riego);
+    
+    const paquete = {
+      apertura,
+      fecha,
+      electrovalvulaId
+    };
+
+    const body=JSON.stringify(paquete);
     
     console.log(body);
     return this._http.post(API_URL + '/api/riego/agregar', body,{'headers':headers});

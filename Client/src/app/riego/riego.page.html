@@ -20,7 +20,7 @@
     <h1>Electrovalvula <small>{{this.idDispositivo}}</small></h1>
     <ul *ngFor="let r of riegos">
       <li>
-        ESTADO:   {{r.apertura}} fecha={{r.fecha}}
+        ESTADO:   {{r.apertura}} fecha={{r.fecha | date:"HH:mm:ss" }}
       </li>
     </ul>
 </ion-content>

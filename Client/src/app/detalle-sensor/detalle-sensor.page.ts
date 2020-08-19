@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import { Medicion } from '../model/Medicion';
 import { MedicionService } from '../services/medicion.service';
-import { ThrowStmt } from '@angular/compiler';
+
 import { Router } from '@angular/router';
 import { RiegoService } from '../services/riego.service';
 
 import { Riego } from '../model/riego';
 import * as moment from 'moment'
+
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
@@ -23,7 +24,7 @@ export class DetalleSensorPage implements OnInit {
 
   private idDispositivo:string;
   private valorObtenido:number=0;
-  public myChart;
+  private myChart;
   private chartOptions;
   private medicion:Medicion;
   public dato:boolean=false;
@@ -38,34 +39,34 @@ export class DetalleSensorPage implements OnInit {
      private rServ:RiegoService,
       private _router:Router) {  
     
-    
+      this.estadoEV();
   }
 
   
 
   ngOnInit() { 
-    this.idDispositivo = this.router.snapshot.paramMap.get('id');
+    
     this.grafico();
-    this.estadoEV();
+    
   }
 
   async estadoEV(){
+    this.idDispositivo = this.router.snapshot.paramMap.get('id');
     this.estadoElectroValvula=await this.rServ.getEstadoByIdElectrovalvula(this.idDispositivo);
-    console.log(this.estadoElectroValvula);
+    //console.log(this.estadoElectroValvula);
 
     this.riego=await this.rServ.getRiegoByIdElectrovalvula(this.idDispositivo);
+
     if(this.riego){
-      //console.log("hay datos");
+      console.log("hay datos");
       
     }
     else{
-      //console.log("no hay datos");
-      this.riego=new Riego(1,0,'2020-01-01 00:00:00',Number(this.idDispositivo));
-
+      console.log("no hay datos");
+      this.estadoElectroValvula=0;
     }
 
-    //this.estadoElectroValvula=this.riego.apertura;
-
+    //console.log(this.estadoElectroValvula);
     if(this.estadoElectroValvula==0){
       this.estadoButton="ABRIR EV";;
     }
@@ -85,32 +86,33 @@ export class DetalleSensorPage implements OnInit {
   addEstadoEV(){
     this.current_datetime = new Date();
     let datetoday = moment(this.current_datetime).format('YYYY-MM-DD HH:mm:ss');
-    //console.log(this.riego);
-    this.riego.fecha=datetoday;
     
     if(this.estadoElectroValvula==0){
-
-      //await this.rServ.addEstado(this.riego);
-      this.riego.apertura=1;
-      //console.log(this.riego);
       
-      this.rServ.addEstado(this.riego)
+      this.rServ.addEstado(1,this.idDispositivo,datetoday)
       .subscribe(data => {
         console.log(data)
-        //this.refreshPeople();
-      });      
+      });
+
     }
     else{
-      this.riego.apertura=0;
-      /*DATO FICTICIO DE MEDICION AL CERRAR LA EV
 
-      this.mServ.agregarMedicion(this.medicion);
-      //await this.rServ.addEstado(this.riego); */
-      this.rServ.addEstado(this.riego)
+      this.rServ.addEstado(0,this.idDispositivo,datetoday)
       .subscribe(data => {
         console.log(data)
-        //this.refreshPeople();
       });
+
+      let valor = Math.random();
+      valor = Math.floor(valor * 100);
+      console.log("SE AGREGO EL VALOR: "+valor);
+
+      this.mServ.agregarMedicion(Number(this.idDispositivo),valor,datetoday)
+      .subscribe(data => {
+        console.log(data)
+      });
+      
+      //this.mServ.agregarMedicion(Number(this.idDispositivo),valor,datetoday);
+
     }
     this.estadoEV();
   }
@@ -119,8 +121,6 @@ export class DetalleSensorPage implements OnInit {
     this.valorObtenido=Number((await this.mServ.getMedicionByIdDispositivo(this.idDispositivo)).valor);
         setTimeout(()=>{
           console.log("Cambio el valor del sensor");
-          //his.valorObtenido=(this.medicion.valor)  ;
-          //llamo al update del chart para refrescar y mostrar el nuevo valor
           this.myChart.update({series: [{
               name: 'kPA',
               data: [this.valorObtenido],
@@ -128,7 +128,7 @@ export class DetalleSensorPage implements OnInit {
                   valueSuffix: ' kPA'
               }
           }]});
-        },8000);
+        },1000);
   }
 
   ionViewDidEnter() {

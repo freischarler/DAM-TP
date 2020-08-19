@@ -1,6 +1,7 @@
 var express = require('express');
 var routerRiego = express.Router();
 var pool = require('../../mysql');
+var routerMedicion = express.Router();
 
 
 //Espera recibir por parámetro un id de dispositivo y devuelve el ultimo estado
@@ -27,6 +28,7 @@ routerRiego.get('/:electrovalvulaId/todas', function(req, res) {
 
 //Espera recibir por parámetro un id de dispositivo y un valor de medición y lo inserta en base de datos.
 routerRiego.post('/agregar', function(req, res) {
+    console.log("AGREGANDO RIEGO");
     console.log(req.body.apertura);
     console.log(req.body.fecha);
     console.log(req.body.electrovalvulaId);
@@ -39,7 +41,7 @@ routerRiego.post('/agregar', function(req, res) {
         "electrovalvulaId": "1"
     }
     */
-    
+
     
     pool.query('INSERT INTO Log_Riegos (apertura, fecha , electrovalvulaId) values (?,?,?)',
      [req.body.apertura, req.body.fecha, req.body.electrovalvulaId], function(err, result, fields) {

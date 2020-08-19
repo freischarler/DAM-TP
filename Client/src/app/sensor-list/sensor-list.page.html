@@ -21,7 +21,7 @@
   <h1>SENSOR <small>{{this.idDispositivo}}</small></h1>
   <ul *ngFor="let m of mediciones">
     <li>
-      n{{m.medicionId}} valor={{m.valor}} fecha={{m.fecha}}
+      n{{m.medicionId}} valor={{m.valor}} t={{m.fecha | date:"HH:mm:ss" }}
     </li>
   </ul>
 
