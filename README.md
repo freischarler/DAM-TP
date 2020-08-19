@@ -16,6 +16,7 @@ git clone https://github.com/freischarler/DAM-TP
 
 # Requisitos
 ```
+mysql
 node
 angular
 ionic
