@@ -22,7 +22,7 @@ export class RiegoPage implements OnInit {
 
   async addList(){
     this.idDispositivo = this.router.snapshot.paramMap.get('id');
-    console.log("ID del sensor-List: "+this.idDispositivo)
+    //console.log("ID del sensor-List: "+this.idDispositivo)
 
     //this.medicion=await this.mServ.getMedicionByIdDispositivo(this.idDispositivo);
     this.riegos=await this.rServ.getRiegosByIdElectrovalvula(this.idDispositivo);

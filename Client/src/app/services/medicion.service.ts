@@ -51,7 +51,7 @@ export class MedicionService {
 
     const body=JSON.stringify(paquete);
 
-    console.log(body);
+    //console.log(body);
     return this._http.post(API_URL + '/api/medicion/agregar', body,{'headers':headers});
 
     //return await this._http.post(API_URL+"/api/medicion/agregar",{body}).toPromise;  

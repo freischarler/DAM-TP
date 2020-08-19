@@ -5,15 +5,11 @@
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
-      <ion-title>Dispositivo -</ion-title>
+      <ion-title>Detalle</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-header>
-  <ion-toolbar>
-    <ion-title>detalleSensor</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 
 <ion-content>
@@ -22,9 +18,21 @@
  
 </ion-content>
 
+<ion-content>
+<!-- Default Item -->
+<ion-item >
+  <ion-label color="dark">Estado actual ({{valorObtenido}} kPa)</ion-label>
+  <ion-label *ngIf="estadoSuelo==0" color="primary"><h2> Suelo saturado</h2></ion-label>
+  <ion-label *ngIf="estadoSuelo==1" color="secondary"><h2> Capacidad de campo</h2></ion-label>
+  <ion-label *ngIf="estadoSuelo==2" color="danger"><h2> Suelo seco, debe regarse</h2></ion-label>
+</ion-item>
 
 
-  <ion-button (click)="addEstadoEV()" expand="block">{{estadoButton}}</ion-button>
+  <ion-button (click)="addEstadoEV()" *ngIf="estadoElectroValvula==0" expand="block">ABRIR EV</ion-button>
+  <ion-button (click)="addEstadoEV()" *ngIf="estadoElectroValvula==1" expand="block">CERRAR EV</ion-button>
+  
+  <!-- OTRA FORMA DE UTILIZARLO
+    ion-button (click)="addEstadoEV()" expand="block">{{estadoButton}}</ion-button -->
 
 
 
@@ -32,6 +40,6 @@
 <ion-button (click)="verMediciones()" color="light" expand="block">VER TODAS LAS MEDICIONES</ion-button>
 <ion-button (click)="verRiegos()" color="light" expand="block">VER LOG RIEGOS</ion-button>  
 
-
+</ion-content>
 
 

@@ -32,48 +32,13 @@ export class SensorListPage implements OnInit {
 
   async addList(){
     this.idDispositivo = this.router.snapshot.paramMap.get('id');
-    console.log("ID del sensor-List: "+this.idDispositivo)
+    //console.log("ID del sensor-List: "+this.idDispositivo)
 
-    //this.medicion=await this.mServ.getMedicionByIdDispositivo(this.idDispositivo);
     this.mediciones=await this.mServ.getMedicionesByIdDispositivo(this.idDispositivo);
     //console.log(this.mediciones);
   }
 
   ngOnInit(){
-    
-    /*
-    this.mServ.getMedicionByIdDispositivo(this.idDispositivo).subscribe(
-      (res)=>{
-        this.medicion=res;
-        console.log("ULTIMA MEDICION"+res);
-      }
-    ); 
-      */
-        
-
-
-
-      /*
-    this.idDispositivo = this.router.snapshot.paramMap.get('id');
-    console.log(this.idDispositivo)
-    this.mServ.getMedicionesByIdDispositivo(this.idDispositivo).subscribe(
-      (res)=>{
-        this.mediciones=res;
-        console.log(res);
-      }
-    ); 
-      */
-
-    //this.mServ.getMedicionByIdDispositivo(this.idDispositivo).then((med)=>{
-    //  this.medicion=med;
-    //});
-
-
-    //this.mServ.getMedicionesByIdDispositivo(this.idDispositivo).then((med)=>{
-    //  console.log(med)
-    //});
-
-    //6
     //opción 1- utilizar libreria Momentjs , haciendo npm install --save moment y luego el import * as moment from 'moment'; en donde lo necesitemos.
     // let a : Medicion= new Medicion(99,moment().format("YYYY-MM-DD hh:mm:ss"),99,1);
 
@@ -85,7 +50,6 @@ export class SensorListPage implements OnInit {
     //this.mServ.agregarMedicion(a).then((med)=>{
     //  console.log(med)
     //});
-    
   }
 
   detalleBack(){

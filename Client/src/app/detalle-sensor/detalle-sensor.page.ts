@@ -26,13 +26,13 @@ export class DetalleSensorPage implements OnInit {
   private valorObtenido:number=0;
   private myChart;
   private chartOptions;
-  private medicion:Medicion;
   public dato:boolean=false;
   private riego:Riego;
-
+  private estadoSuelo:number;
   private current_datetime:Date;
   private estadoElectroValvula:number=0;
-  private estadoButton:String="ABRIR ELECTROVALVULA";
+  
+  //private estadoButton:String="ABRIR ELECTROVALVULA";
 
   constructor(private router:ActivatedRoute,
      private mServ:MedicionService,
@@ -40,39 +40,34 @@ export class DetalleSensorPage implements OnInit {
       private _router:Router) {  
     
       this.estadoEV();
+      this.grafico();
   }
 
-  
-
   ngOnInit() { 
-    
-    this.grafico();
     
   }
 
   async estadoEV(){
+
+    //codigo para ver el estado de la Electrovalvula y la creacion de botones
+
     this.idDispositivo = this.router.snapshot.paramMap.get('id');
     this.estadoElectroValvula=await this.rServ.getEstadoByIdElectrovalvula(this.idDispositivo);
-    //console.log(this.estadoElectroValvula);
 
     this.riego=await this.rServ.getRiegoByIdElectrovalvula(this.idDispositivo);
 
-    if(this.riego){
-      console.log("hay datos");
-      
-    }
-    else{
-      console.log("no hay datos");
+    //SI NO EXISTEN DATOS, DOY POR SENTADO QUE LA EV ESTA CERRADA
+    if(!this.riego){
       this.estadoElectroValvula=0;
     }
 
-    //console.log(this.estadoElectroValvula);
+    /*FORMA 2 de implementar los botones;
     if(this.estadoElectroValvula==0){
       this.estadoButton="ABRIR EV";;
     }
     else{
       this.estadoButton="CERRAR EV";
-    }
+    }*/
   }
 
   verMediciones(){
@@ -102,25 +97,39 @@ export class DetalleSensorPage implements OnInit {
         console.log(data)
       });
 
+      //crea una nueva medicion cuando se cierra la EV
+      
       let valor = Math.random();
-      valor = Math.floor(valor * 100);
+      valor = Math.floor(valor * 100)%30;
       console.log("SE AGREGO EL VALOR: "+valor);
 
       this.mServ.agregarMedicion(Number(this.idDispositivo),valor,datetoday)
       .subscribe(data => {
         console.log(data)
       });
-      
-      //this.mServ.agregarMedicion(Number(this.idDispositivo),valor,datetoday);
-
     }
     this.estadoEV();
+    this.grafico();
   }
 
   async grafico(){
     this.valorObtenido=Number((await this.mServ.getMedicionByIdDispositivo(this.idDispositivo)).valor);
+    
+    /*PARA UN CODIGO MAS COMPLETO DEBERIA PROGRAMAR PARA EL CASO
+      EN QUE NO EXISTAN DATOS DE MEDICIONES */
+
+    if(this.valorObtenido<=10){
+      this.estadoSuelo=0;
+    }
+    if(this.valorObtenido>10 && this.valorObtenido<=30){
+      this.estadoSuelo=1;
+    }
+    if(this.valorObtenido>30){
+      this.estadoSuelo=2;
+    }
+
         setTimeout(()=>{
-          console.log("Cambio el valor del sensor");
+          //console.log("Cambio el valor del sensor");
           this.myChart.update({series: [{
               name: 'kPA',
               data: [this.valorObtenido],

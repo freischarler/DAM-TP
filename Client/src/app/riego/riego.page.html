@@ -5,22 +5,25 @@
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
-      <ion-title>Dispositivo -</ion-title>
+      <ion-title>Log Riegos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-header>
   <ion-toolbar>
-    <ion-title>riego</ion-title>
+    <ion-title>Electrovalvula <small>{{this.idDispositivo}}</small></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-content> 
-    <h1>Electrovalvula <small>{{this.idDispositivo}}</small></h1>
+  <ion-content > 
     <ul *ngFor="let r of riegos">
       <li>
-        ESTADO:   {{r.apertura}} fecha={{r.fecha | date:"HH:mm:ss" }}
+
+        <ion-icon *ngIf="r.apertura==0" name="lock-closed-outline"></ion-icon>
+        <ion-icon *ngIf="r.apertura==1"name="lock-open-outline"></ion-icon>
+        
+        {{r.fecha | date:"short" }} : 
+        <strong> {{r.apertura}} </strong>
       </li>
     </ul>
 </ion-content>

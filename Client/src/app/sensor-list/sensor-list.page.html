@@ -5,26 +5,21 @@
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
-      <ion-title>Dispositivo -</ion-title>
+      <ion-title>Log Mediciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<!-- 
-        this.medicion.dispositivoId
-        this.medicion.fecha
-        this.medicion.medicionId
-        this.medicion.valor
--->
-
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sensor <small>{{this.idDispositivo}}</small></ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content> 
-  <h1>SENSOR <small>{{this.idDispositivo}}</small></h1>
   <ul *ngFor="let m of mediciones">
     <li>
-      n{{m.medicionId}} valor={{m.valor}} t={{m.fecha | date:"HH:mm:ss" }}
+      (n{{m.medicionId}})   <strong> {{m.fecha | date:"short" }}  </strong>
+       value: <strong> {{m.valor}} </strong>
     </li>
   </ul>
-
- 
-
 </ion-content>

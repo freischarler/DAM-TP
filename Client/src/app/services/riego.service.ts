@@ -31,14 +31,14 @@ export class RiegoService {
 
     const body=JSON.stringify(paquete);
     
-    console.log(body);
+    //console.log(body);
     return this._http.post(API_URL + '/api/riego/agregar', body,{'headers':headers});
   }
 
   
   async getRiegosByIdElectrovalvula(id): Promise<Riego[]>{     
     this.ResultRiegos=await this._http.get<Riego[]>(API_URL + '/api/riego/'+id+'/todas').toPromise();
-    console.log (this.ResultRiegos);
+    //console.log (this.ResultRiegos);
     return this.ResultRiegos;
   }
 
