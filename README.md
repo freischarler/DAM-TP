@@ -7,7 +7,7 @@ El proyecto se trata de una interfaz web donde podemos visualizar dispositivos y
 
 # Clonar la aplicación
 ```sh
-git clone https://github.com/freischarler/daw_tp_final
+git clone https://github.com/freischarler/DAM-TP
 ```
 
 # Requisitos
