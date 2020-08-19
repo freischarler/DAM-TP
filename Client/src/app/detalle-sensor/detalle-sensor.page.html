@@ -12,19 +12,22 @@
 
 
 
-<ion-content>
+<ion-content id="highcharts" style="width:100%; height:300px;">
+
   
-    <div id="highcharts" style="width:100%; height:250px;"></div>
- 
+
+
 </ion-content>
 
 <ion-content>
 <!-- Default Item -->
 <ion-item >
-  <ion-label color="dark">Estado actual ({{valorObtenido}} kPa)</ion-label>
+  <small>Estado</small>
+</ion-item>
+<ion-item>
   <ion-label *ngIf="estadoSuelo==0" color="primary"><h2> Suelo saturado</h2></ion-label>
   <ion-label *ngIf="estadoSuelo==1" color="secondary"><h2> Capacidad de campo</h2></ion-label>
-  <ion-label *ngIf="estadoSuelo==2" color="danger"><h2> Suelo seco, debe regarse</h2></ion-label>
+  <ion-label *ngIf="estadoSuelo==2" color="danger"><h2> Suelo seco, se recomienda abrir la EV</h2></ion-label>
 </ion-item>
 
 

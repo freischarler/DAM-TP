@@ -86,7 +86,7 @@ export class DetalleSensorPage implements OnInit {
       
       this.rServ.addEstado(1,this.idDispositivo,datetoday)
       .subscribe(data => {
-        console.log(data)
+        //console.log(data)
       });
 
     }
@@ -94,18 +94,18 @@ export class DetalleSensorPage implements OnInit {
 
       this.rServ.addEstado(0,this.idDispositivo,datetoday)
       .subscribe(data => {
-        console.log(data)
+        //console.log(data)
       });
 
       //crea una nueva medicion cuando se cierra la EV
       
       let valor = Math.random();
       valor = Math.floor(valor * 100)%30;
-      console.log("SE AGREGO EL VALOR: "+valor);
+        //console.log("SE AGREGO EL VALOR: "+valor);
 
       this.mServ.agregarMedicion(Number(this.idDispositivo),valor,datetoday)
       .subscribe(data => {
-        console.log(data)
+        //console.log(data)
       });
     }
     this.estadoEV();
@@ -137,7 +137,7 @@ export class DetalleSensorPage implements OnInit {
                   valueSuffix: ' kPA'
               }
           }]});
-        },1000);
+        },2000);
   }
 
   ionViewDidEnter() {

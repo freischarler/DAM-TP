@@ -2,12 +2,8 @@ import { Injectable } from '@angular/core';
 import { Riego } from '../model/riego';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import * as moment from 'moment';
-
-
 
 const API_URL="http://localhost:3000"
-
 
 @Injectable({
   providedIn: 'root'
