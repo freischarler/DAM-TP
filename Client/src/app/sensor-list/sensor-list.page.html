@@ -24,40 +24,42 @@
   </ul>
 </ion-content -->
 
-<ion-content> 
+<ion-item> 
   <ion-grid>
     <ion-row >
-      <ion-col> 
+      <ion-col class="ion-text-center"> 
         <div>
-          <strong>n</strong>
+          <strong>Medición</strong>
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="ion-text-center">
         <div>
         <strong>Valor</strong>
         </div>
-      </ion-col>
-      <ion-col>
+      </ion-col >
+      <ion-col class="ion-text-center">
         <div>
           <strong>Fecha</strong>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+</ion-item> 
+
+<ion-content>
   <ion-grid>
     <ion-row *ngFor="let m of mediciones">
-      <ion-col> 
+      <ion-col class="ion-text-center"> 
         <div>
           {{m.medicionId}}
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="ion-text-center">
         <div>
           {{m.valor}} 
         </div>
       </ion-col>
-      <ion-col>
+      <ion-col class="ion-text-center">
         <div>
           {{m.fecha | date:"short" }}
         </div>

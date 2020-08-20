@@ -15,15 +15,48 @@
   </ion-toolbar>
 </ion-header>
 
-  <ion-content > 
-    <ul *ngFor="let r of riegos">
-      <li>
 
-        <ion-icon *ngIf="r.apertura==0" name="lock-closed-outline"></ion-icon>
-        <ion-icon *ngIf="r.apertura==1"name="lock-open-outline"></ion-icon>
-        
-        {{r.fecha | date:"short" }} : 
-        <strong> {{r.apertura}} </strong>
-      </li>
-    </ul>
+<ion-item> 
+  <ion-grid>
+    <ion-row >
+      <ion-col class="ion-text-center"> 
+        <div>
+          <strong>Icon</strong>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div>
+        <strong>Valor</strong>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div>
+          <strong>Fecha</strong>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item> 
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let r of riegos">
+      <ion-col class="ion-text-center"> 
+        <div >
+          <ion-icon *ngIf="r.apertura==0" name="lock-closed-outline"></ion-icon>
+          <ion-icon *ngIf="r.apertura==1"name="lock-open-outline"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div>
+          {{r.apertura}} 
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div > 
+          {{r.fecha | date:"short" }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
